@@ -1,6 +1,6 @@
 class Menace extends Agent {
   constructor(x,y,size,vx,vy) {
-    super(x,y,size,'#800000');
+    super(x,y,size,'#FF333c');
     this.vx = vx;
     this.vy = vy;
   }
@@ -19,5 +19,5 @@ class Menace extends Agent {
     this.x = constrain(this.x + this.vx, this.size/2, width-this.size/2);
     this.y = constrain(this.y + this.vy, this.size/2, height-this.size/2);
   }
-  
+
 }

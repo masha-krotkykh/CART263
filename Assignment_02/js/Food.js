@@ -1,6 +1,6 @@
 class Food extends Agent {
   constructor(x,y,minSize,maxSize,vx,vy) {
-    super(x,y,random(minSize,maxSize),'#5588ff');
+    super(x,y,random(minSize,maxSize),'#581845');
     this.maxSize = maxSize;
     this.minSize = minSize;
     this.vx = vx;

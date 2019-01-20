@@ -17,7 +17,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background('#F0F4F3');
   myAvatar.update();
   if(myAvatar.overlap(myMenace)) {
     myAvatar.damagedBy(myMenace);
