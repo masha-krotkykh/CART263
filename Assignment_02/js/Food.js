@@ -23,10 +23,10 @@ class Food extends Agent {
     if(this.y + this.size/2 >= height || this.y - this.size/2 <= 0){
       this.vy = -this.vy;
     }
-    this.x += this.vx;
-    this.y += this.vy;
-    this.x = constrain(this.x, this.size/2, width-this.size/2);
-    this.y = constrain(this.y, this.size/2, height-this.size/2);
+    // this.x += this.vx;
+    // this.y += this.vy;
+    this.x = constrain(this.x + this.vx, this.size/2, width-this.size/2);
+    this.y = constrain(this.y + this.vy, this.size/2, height-this.size/2);
   }
 
   reset() {

@@ -12,7 +12,7 @@ class Avatar extends Agent {
     this.x = mouseX;
     this.y = mouseY;
     // this.size = size - decrease;
-    this.size = constrain(this.size-this.decrease,0,this.maxSize);
+    this.size = constrain(this.size - this.decrease,0,this.maxSize);
     // this.size = constrain(this.size,0,this.maxSize);
     if(this.size === 0) {
       this.active = false;
@@ -25,5 +25,12 @@ class Avatar extends Agent {
     }
     this.size = constrain(this.size + other.size, 0, this.maxSize);
     other.reset();
+  }
+
+  damagedBy(other) {
+    if(!this.active){
+      return;
+    }
+    this.size -= 1;
   }
 }
