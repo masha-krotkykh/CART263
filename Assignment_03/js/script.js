@@ -12,7 +12,7 @@ author, and this description to match your project!
 $(document).ready(setup);
   // This code will run when the document is ready
 let secretsFound = 0;
-let allSecrets = 6;
+let allSecrets = 7;
 
 function setup () {
   setInterval(update,500);
