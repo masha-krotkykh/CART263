@@ -2,15 +2,29 @@
 
 let $fly;
 let $mouth;
+let $candy;
+
+let $buzz = new Audio('../assets/sounds/buzz.mp3');
+$buzz.loop = true;
+let $crunch = new Audio('../assets/sounds/crunch.wav');
 
 $(document).ready(function() {
 
   console.log("Ready!");
   $fly = $('#fly');
   $mouth = $('#mouth');
+  $candy = $('#candy');
 
   $fly.draggable();
+  $fly.mousedown(function() {
+      $buzz.play();
+  });
+
+  $candy.draggable({ revert: true });
+
   $mouth.droppable({
+    accept: ".eatable",
+
     drop: function(event, ui) {
       $(this)
       console.log("Yum!");
@@ -26,9 +40,13 @@ $(document).ready(function() {
   function chew() {
     if($mouth.attr('src') === 'assets/images/mouth-open.png') {
       $mouth.attr('src', 'assets/images/mouth-closed.png');
+      $crunch.play();
+      $buzz.pause();
     }
     else {
       $mouth.attr('src', 'assets/images/mouth-open.png');
     }
   }
+
+
 });
