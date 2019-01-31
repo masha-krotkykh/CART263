@@ -7,6 +7,7 @@ let $candy;
 let $buzz = new Audio('../assets/sounds/buzz.mp3');
 $buzz.loop = true;
 let $crunch = new Audio('../assets/sounds/crunch.wav');
+let $ergh = new Audio('../assets/sounds/ergh.mp3');
 
 $(document).ready(function() {
 
@@ -20,7 +21,14 @@ $(document).ready(function() {
       $buzz.play();
   });
 
-  $candy.draggable({ revert: true });
+  $candy.draggable({
+      revert: true
+    },
+    {
+      start: function() {
+        $ergh.play();
+      }
+  });
 
   $mouth.droppable({
     accept: ".eatable",
@@ -47,6 +55,4 @@ $(document).ready(function() {
       $mouth.attr('src', 'assets/images/mouth-open.png');
     }
   }
-
-
 });
