@@ -4,10 +4,10 @@ let $fly;
 let $mouth;
 let $candy;
 
-let $buzz = new Audio('Assignment_04/assets/sounds/buzz.mp3');
+let $buzz = new Audio('assets/sounds/buzz.mp3');
 $buzz.loop = true;
-let $crunch = new Audio('Assignment_04/assets/sounds/crunch.wav');
-let $ergh = new Audio('Assignment_04/assets/sounds/ergh.mp3');
+let $crunch = new Audio('assets/sounds/crunch.wav');
+let $ergh = new Audio('assets/sounds/ergh.mp3');
 
 $(document).ready(function() {
 
