@@ -6,6 +6,7 @@ let $folder3;
 let $folder4;
 let $folder5;
 let $doc;
+let $progress;
 
 // getting random valus within html document margins
 let randWidth = Math.floor((Math.random()*document.width));
@@ -26,6 +27,9 @@ $(document).ready(function() {
   $folder4 = $('#folder4');
   $folder5 = $('#folder5');
   $doc = $('.doc');
+  $progress = 0;
+
+  $("span#progress").text($progress);
 
   $(".doc").css('left', randWidth); // The enemies are flying doors...
   $(".doc").css('top', randHeight);
@@ -55,6 +59,9 @@ $(document).ready(function() {
       // setTimeout(function() {
       //   clearInterval(chewInterval);
       // }, 2000);
+      $progress += 5;
+      $("span#progress").text($progress);
+      console.log($progress);
     }
   });
   $folder2.droppable({
@@ -63,6 +70,8 @@ $(document).ready(function() {
     drop: function(event, ui) {
       $(this)
       ui.draggable.remove();
+      $progress += 5;
+      $("span#progress").text($progress);
     }
   });
   $folder3.droppable({
@@ -71,6 +80,8 @@ $(document).ready(function() {
     drop: function(event, ui) {
       $(this)
       ui.draggable.remove();
+      $progress += 5;
+      $("span#progress").text($progress);
     }
   });
   $folder4.droppable({
@@ -79,6 +90,8 @@ $(document).ready(function() {
     drop: function(event, ui) {
       $(this)
       ui.draggable.remove();
+      $progress += 5;
+      $("span#progress").text($progress);
     }
   });
   $folder5.droppable({
@@ -87,6 +100,8 @@ $(document).ready(function() {
     drop: function(event, ui) {
       $(this)
       ui.draggable.remove();
+      $progress += 5;
+      $("span#progress").text($progress);
     }
   });
 
