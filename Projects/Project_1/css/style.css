@@ -41,6 +41,11 @@ This is the style file for this project.
   background-color: #669999;
 }
 
+/* ----styling of document elements ---- */
 .doc {
   width: 15%;
+}
+
+.ui-progressbar {
+  background-color: red;
 }

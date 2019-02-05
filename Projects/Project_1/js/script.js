@@ -29,16 +29,9 @@ $(document).ready(function() {
   $doc = $('.doc');
   $progress = 0;
 
-  $("span#progress").text($progress);
+  // $(".doc").css('left', randWidth); // The enemies are flying doors...
+  // $(".doc").css('top', randHeight);
 
-  $(".doc").css('left', randWidth); // The enemies are flying doors...
-  $(".doc").css('top', randHeight);
-
-  $doc.draggable();
-  // $fly.mousedown(function() {
-  //     $buzz.play();
-  // });
-  //
   $doc.draggable({
       revert: true
     // },
@@ -50,7 +43,7 @@ $(document).ready(function() {
 
 // For loop to match documents to folders. Only documents with classes, corresponding to
 // folder numbers will be accepted by these folders e.g. only documents with class ".to1"
-// will be accepted by the folder with the ID "#folder1"    
+// will be accepted by the folder with the ID "#folder1"
 
 for (var i = 0; i < 6; i++) {
   let activeFolder = '#folder'+i;
@@ -64,11 +57,17 @@ for (var i = 0; i < 6; i++) {
       $progress += 5;
       $("span#progress").text($progress);
       console.log($progress);
+      updateProgressbar();
     }
   });
 }
 
-
+function updateProgressbar() {
+  $("#stats").progressbar({
+    value: $progress
+  });
+  $("span#progress").text($progress);
+};
 
 
 
