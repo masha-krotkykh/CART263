@@ -63,7 +63,7 @@ for (var i = 0; i < 6; i++) {
 }
 
 function updateProgressbar() {
-  $("#stats").progressbar({
+  $("#statsBar").progressbar({
     value: $progress
   });
   $("span#progress").text($progress);

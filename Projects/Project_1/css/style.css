@@ -3,15 +3,24 @@
 This is the style file for this project.
 
 **********************************************/
-/* -- Stat bar styling --*/
-#stats {
+/* -- Stats bar styling --*/
+#statsBar {
   font-size: 1.5em;
   font-family: Courier, Arial, sans-serif;
+  color: gray;
   padding: 10px;
   margin-bottom: 20px;
-  background-color: #d4d4d4;
-  text-align: right;
+  background-color: #000000;
+  text-align: center;
+  position: relative;
+  height: 30px;
 }
+
+#stats {
+  position: absolute;
+  right: 15px;
+}
+
 /* ---- defining properties for all folders (.folders class) ---- */
 .folder {
   width: 14%;
