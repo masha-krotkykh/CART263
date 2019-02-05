@@ -47,63 +47,87 @@ $(document).ready(function() {
     //     $ergh.play();
     //   }
   });
-  //
-  $folder1.droppable({
-    accept: ".to1",
+
+// For loop to match documents to folders. Only documents with classes, corresponding to
+// folder numbers will be accepted by these folders e.g. only documents with class ".to1"
+// will be accepted by the folder with the ID "#folder1"    
+
+for (var i = 0; i < 6; i++) {
+  let activeFolder = '#folder'+i;
+  let activeDoc = '.to'+i;
+  $(activeFolder).droppable({
+    accept: activeDoc,
 
     drop: function(event, ui) {
       $(this)
       ui.draggable.remove();
-      // let chewInterval = setInterval(chew, 300);
-      //
-      // setTimeout(function() {
-      //   clearInterval(chewInterval);
-      // }, 2000);
       $progress += 5;
       $("span#progress").text($progress);
       console.log($progress);
     }
   });
-  $folder2.droppable({
-    accept: ".to2",
+}
 
-    drop: function(event, ui) {
-      $(this)
-      ui.draggable.remove();
-      $progress += 5;
-      $("span#progress").text($progress);
-    }
-  });
-  $folder3.droppable({
-    accept: ".to3",
 
-    drop: function(event, ui) {
-      $(this)
-      ui.draggable.remove();
-      $progress += 5;
-      $("span#progress").text($progress);
-    }
-  });
-  $folder4.droppable({
-    accept: ".to4",
 
-    drop: function(event, ui) {
-      $(this)
-      ui.draggable.remove();
-      $progress += 5;
-      $("span#progress").text($progress);
-    }
-  });
-  $folder5.droppable({
-    accept: ".to5",
 
-    drop: function(event, ui) {
-      $(this)
-      ui.draggable.remove();
-      $progress += 5;
-      $("span#progress").text($progress);
-    }
-  });
+
+  // $folder1.droppable({
+  //   accept: ".to1",
+  //
+  //   drop: function(event, ui) {
+  //     $(this)
+  //     ui.draggable.remove();
+  //     // let chewInterval = setInterval(chew, 300);
+  //     //
+  //     // setTimeout(function() {
+  //     //   clearInterval(chewInterval);
+  //     // }, 2000);
+  //     $progress += 5;
+  //     $("span#progress").text($progress);
+  //     console.log($progress);
+  //   }
+  // });
+  // $folder2.droppable({
+  //   accept: ".to2",
+  //
+  //   drop: function(event, ui) {
+  //     $(this)
+  //     ui.draggable.remove();
+  //     $progress += 5;
+  //     $("span#progress").text($progress);
+  //   }
+  // });
+  // $folder3.droppable({
+  //   accept: ".to3",
+  //
+  //   drop: function(event, ui) {
+  //     $(this)
+  //     ui.draggable.remove();
+  //     $progress += 5;
+  //     $("span#progress").text($progress);
+  //   }
+  // });
+  // $folder4.droppable({
+  //   accept: ".to4",
+  //
+  //   drop: function(event, ui) {
+  //     $(this)
+  //     ui.draggable.remove();
+  //     $progress += 5;
+  //     $("span#progress").text($progress);
+  //   }
+  // });
+  // $folder5.droppable({
+  //   accept: ".to5",
+  //
+  //   drop: function(event, ui) {
+  //     $(this)
+  //     ui.draggable.remove();
+  //     $progress += 5;
+  //     $("span#progress").text($progress);
+  //   }
+  // });
 
 
 
