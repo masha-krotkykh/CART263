@@ -11,6 +11,7 @@ let $workProgress;
 let $maxProgress = 10;
 let $bus;
 let $progressbar;
+let $background;
 
 // getting random valus within html document margins
 let randWidth = Math.floor((Math.random()*document.width));
@@ -35,6 +36,7 @@ $(document).ready(function() {
 
   $bus = $('#bus');
   $progressbar = $('#progressbar');
+  $background = $('#container');
 
 // We don't want to display the bus or its progress at the beginning, so we hide them
   $workProgress = 0;
@@ -85,6 +87,7 @@ function updateProgressbar() {
 
   if ($workProgress === $maxProgress) {
     goHome();
+    drivingProgress(); 
   }
 };
 
@@ -98,7 +101,6 @@ function updateProgressbar() {
     $bus.show();
     $progressbar.show();
     let driveInterval = setInterval(drive, 400);
-    // location.reload(true);
   }
 
   function drive() {
@@ -109,36 +111,41 @@ function updateProgressbar() {
       else {
         $bus.attr('src', 'assets/images/bus_down.png');
       }
+      $background.animate({
+        backgroundColor: "#000000",
+      }, 3000 );
   }
 
 
-  $( function() {
-let progressbar = $( "#progressbar" ),
-  progressLabel = $( ".progress-label" );
+  function drivingProgress() {
+    let progressbar = $( "#progressbar" ),
+    progressLabel = $( ".progress-label" );
 
-progressbar.progressbar({
-  value: false,
-  change: function() {
-    progressLabel.text( progressbar.progressbar( "value" ) + "%" );
-  },
-  // complete: function() {
-  //   progressLabel.text( "Complete!" );
-  // }
-});
+    progressbar.progressbar({
+      value: false,
+      change: function() {
+        progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+      },
+      complete: function() {
+        location.reload(true);
+      }
+    });
 
-function progress() {
-  var val = progressbar.progressbar( "value" ) || 0;
+    function progress() {
+      let val = progressbar.progressbar( "value" ) || 0;
 
-  progressbar.progressbar( "value", val + 2 );
+      progressbar.progressbar( "value", val + 2 );
 
-  if ( val < 99 ) {
-    setTimeout( progress, 80 );
-  }
-}
+      if ( val < 99 ) {
+        setTimeout( progress, 100 );
+      }
+      else if (val >= 99) {
+        val = 0;
+      }
+    }
 
-setTimeout( progress, 2000 );
-} );
-
+    setTimeout( progress, 3000 );
+  };
 
 
 });
