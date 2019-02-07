@@ -113,3 +113,9 @@ This is the style file for this project.
   top: -100%;
   left: 25%;
 }
+
+#docs {
+position: relative;
+margin-top: 50px;
+min-height: 400px;
+}

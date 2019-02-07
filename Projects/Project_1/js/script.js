@@ -17,12 +17,12 @@ let $home;
 let $rock;
 let $dead = false;
 
-let $radioSound = new Audio('../assets/sounds/radio.wav');
+let $radioSound = new Audio('../Project_1/assets/sounds/radio.wav');
 $radioSound.loop = true;
-let $acceptSound = new Audio('../assets/sounds/paper_yes.mp3');
-let $refuseSound = new Audio('../assets/sounds/paper_no.wav');
-let $driveSound = new Audio('../assets/sounds/drive.wav');
-let $splatSound = new Audio('../assets/sounds/splat.wav');
+let $acceptSound = new Audio('../Project_1/assets/sounds/paper_yes.mp3');
+let $refuseSound = new Audio('../Project_1/assets/sounds/paper_no.wav');
+let $driveSound = new Audio('../Project_1/assets/sounds/drive.wav');
+let $splatSound = new Audio('../Project_1/assets/sounds/splat.wav');
 $driveSound.loop = true;
 
 $(document).ready(function() {
@@ -46,13 +46,13 @@ $(document).ready(function() {
 
 // Function to display documents on the page in random positions
 $doc.each(function() {
-   let $maxHeight = $(window).height();
-   let $maxWidth = $(window).width();
+   let $maxHeight = $('#docs').height();
+   let $maxWidth = $('#docs').width();
 
    let $dragheight = $(this).height(); //draggable height
    let $dragwidth  = $(this).width(); // draggable width
 
-   let $randomtop = Math.floor((Math.random() * ($maxHeight - $dragheight)));
+   let $randomtop = Math.floor((Math.random() * $maxHeight));
    let $randomleft = Math.floor((Math.random() * ($maxWidth - $dragwidth)));
 
    $(this).css({
