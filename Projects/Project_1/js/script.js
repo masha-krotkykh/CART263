@@ -125,6 +125,7 @@ function updateProgressbar() {
     console.log("done...");
     $folder.hide();
     $doc.hide();
+    $('#docs').hide();
     $('#statsBar').hide();
     $home.show();
     $driveSound.play();
