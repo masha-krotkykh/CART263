@@ -8,6 +8,7 @@ This is the style file for this project.
   max-width: 1000px;
   height: 100vh;
   margin: 0 auto;
+  position: relative;
 }
 /* -- Stats bar styling --*/
 #statsBar {
@@ -59,6 +60,7 @@ This is the style file for this project.
 /* ----styling of document elements ---- */
 .doc {
   width: 15%;
+  position: absolute;
 }
 
 /* ---- styling of the bus ---- */
@@ -90,4 +92,24 @@ This is the style file for this project.
   left: 40%;
   top: 2px;
   text-align:
+}
+
+#button {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 10px;
+  font-family: Courier, monospace;
+  width: 35%;
+  padding:5px;
+  font-size: 1.2em;
+}
+
+#rock {
+  display: block;
+  width: 50%;
+  position: absolute;
+  top: -100%;
+  left: 25%;
 }
