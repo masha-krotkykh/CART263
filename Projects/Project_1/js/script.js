@@ -1,10 +1,5 @@
 "use strict"
 // declaring basic variables
-let $folder1;
-let $folder2;
-let $folder3;
-let $folder4;
-let $folder5;
 let $doc;
 let $folder;
 let $workProgress;
@@ -19,6 +14,7 @@ let $dead = false;
 
 let $radioSound = new Audio('../Project_1/assets/sounds/radio.wav');
 $radioSound.loop = true;
+  $radioSound.play();
 let $acceptSound = new Audio('../Project_1/assets/sounds/paper_yes.mp3');
 let $refuseSound = new Audio('../Project_1/assets/sounds/paper_no.wav');
 let $driveSound = new Audio('../Project_1/assets/sounds/drive.wav');
@@ -29,11 +25,6 @@ $(document).ready(function() {
 
   console.log("Ready!");
 // referring basic variables to the DOM elements
-  $folder1 = $('#folder1');
-  $folder2 = $('#folder2');
-  $folder3 = $('#folder3');
-  $folder4 = $('#folder4');
-  $folder5 = $('#folder5');
   $folder = $('.folder');
   $doc = $('.doc');
   $home = $('#home');
@@ -42,7 +33,7 @@ $(document).ready(function() {
 
   // To stop bus sound and start radio sound when at work
   $driveSound.pause();
-  $radioSound.play();
+
 
 // Function to display documents on the page in random positions
 $doc.each(function() {
@@ -144,7 +135,7 @@ function updateProgressbar() {
         backgroundColor: "#000000",
       }, 3000 );
       $radioSound.pause();
-      
+
   }
 
 // Displaying going home progress (bar animation and text)
