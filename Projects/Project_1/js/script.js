@@ -12,14 +12,15 @@ let $home;
 let $rock;
 let $dead = false;
 
+// loading sound files
 let $radioSound = new Audio('../Project_1/assets/sounds/radio.wav');
 $radioSound.loop = true;
-  $radioSound.play();
 let $acceptSound = new Audio('../Project_1/assets/sounds/paper_yes.mp3');
 let $refuseSound = new Audio('../Project_1/assets/sounds/paper_no.wav');
 let $driveSound = new Audio('../Project_1/assets/sounds/drive.wav');
 let $splatSound = new Audio('../Project_1/assets/sounds/splat.wav');
 $driveSound.loop = true;
+
 
 $(document).ready(function() {
 
@@ -30,9 +31,17 @@ $(document).ready(function() {
   $home = $('#home');
   $button = $('#button');
   $rock = $('#rock');
+  $bus = $('#bus');
+  $progressbar = $('#progressbar');
+  $background = $('#container');
 
   // To stop bus sound and start radio sound when at work
+  // $radioSound.play();
   $driveSound.pause();
+  const playPromise = $radioSound.play();
+if (playPromise !== null){
+    playPromise.catch(() => { $radioSound.play(); })
+}
 
 
 // Function to display documents on the page in random positions
@@ -52,9 +61,7 @@ $doc.each(function() {
    });
 });
 
-  $bus = $('#bus');
-  $progressbar = $('#progressbar');
-  $background = $('#container');
+
 
 // We don't want to display the bus or its progress at the beginning, so we hide them
 // as well as the 'kill me' button

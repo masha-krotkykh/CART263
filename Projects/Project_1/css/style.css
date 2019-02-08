@@ -108,10 +108,10 @@ This is the style file for this project.
 
 #rock {
   display: block;
-  width: 50%;
+  width: 70%;
   position: absolute;
   top: -100%;
-  left: 25%;
+  left: 15%;
 }
 
 #docs {
