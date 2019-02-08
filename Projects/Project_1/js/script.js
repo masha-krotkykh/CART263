@@ -3,7 +3,7 @@
 let $doc;
 let $folder;
 let $workProgress;
-let $maxProgress = 10;
+let $maxProgress = 95;
 let $bus;
 let $progressbar;
 let $background;
@@ -36,7 +36,6 @@ $(document).ready(function() {
   $background = $('#container');
 
   // To stop bus sound and start radio sound when at work
-  $radioSound.pause();
   $radioSound.play();
   $driveSound.pause();
 
