@@ -136,7 +136,6 @@ function updateProgressbar() {
   function drive() {
       if($bus.attr('src') === 'assets/images/bus_down.png') {
         $bus.attr('src', 'assets/images/bus_up.png');
-        // $crunch.play();
       }
       else {
         $bus.attr('src', 'assets/images/bus_down.png');
@@ -144,6 +143,8 @@ function updateProgressbar() {
       $background.animate({
         backgroundColor: "#000000",
       }, 3000 );
+      $radioSound.pause();
+      
   }
 
 // Displaying going home progress (bar animation and text)
