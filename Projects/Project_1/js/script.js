@@ -36,12 +36,9 @@ $(document).ready(function() {
   $background = $('#container');
 
   // To stop bus sound and start radio sound when at work
-  // $radioSound.play();
+  $radioSound.pause();
+  $radioSound.play();
   $driveSound.pause();
-  const playPromise = $radioSound.play();
-if (playPromise !== null){
-    playPromise.catch(() => { $radioSound.play(); })
-}
 
 
 // Function to display documents on the page in random positions
