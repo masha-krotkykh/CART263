@@ -1,0 +1,13 @@
+/*********************************************
+
+This is the style file for this project.
+
+**********************************************/
+#clickable {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-size: 2em;
+  font-family: courier;
+  background-color: #f9f9f9;
+}
