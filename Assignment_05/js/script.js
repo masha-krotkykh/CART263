@@ -172,7 +172,7 @@ $(document).ready(function() {
       var commands = {
         'i give up': giveUp,
         'say it again': speakAnimal,
-        // 'i think it is': tryOption
+        'i think it is *tag': checkGuess
       };
 
       // Add our commands to annyang
@@ -195,28 +195,32 @@ function addButton(label) {
   let $guess = $('<div class="guess"></div>');
   $guess.text(label);
   $guess.button();
-  $guess.on('click', function(){
-    if($(this).text() === correctAnimal) {
-      console.log("correct!");
-      // remove all buttons
-      $('.guess').remove();
-      // start new round
-      setTimeout(newRound, 1000);
-      score += 1;
-    }
-    else {
-      console.log("wrong!");
-      // shake the wrong button and repeat the correct animal
-      $(this).effect('shake');
-      speakAnimal(correctAnimal);
-      // and reset the score
-      score = 0;
-    }
-    $('#score').text('Your current score: ' + score);
-  });
+  $guess.on('click', checkGuess);
 
   $('body').append($guess);
 }
+
+function checkGuess(tag){
+  if($(this).text() === correctAnimal || tag === correctAnimal) {
+    console.log("correct!");
+    // remove all buttons
+    $('.guess').remove();
+    // start new round
+    setTimeout(newRound, 1000);
+    score += 1;
+  }
+  else {
+    console.log("wrong!");
+    // shake the wrong button and repeat the correct animal
+    $(this).effect('shake');
+    speakAnimal(correctAnimal);
+    // and reset the score
+    score = 0;
+  }
+  $('#score').text('Your current score: ' + score);
+}
+
+
 
 function newRound() {
   answers = [];
@@ -228,7 +232,6 @@ function newRound() {
   // Choosinng a random animal from an array to be the correct animal
   correctAnimal = answers[Math.floor(Math.random() * answers.length)];
   speakAnimal(correctAnimal);
-
 }
 
 function speakAnimal() {
