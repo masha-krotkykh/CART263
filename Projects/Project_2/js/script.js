@@ -9,9 +9,10 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 
 ******************/
-let randomIndex = 0;
+let randomIndex;
 let jsonEntries = [];
-let input = $('#input');
+let lexicon;
+
 
 $.getJSON('quotes.json', function (data){
   jsonEntries = data.quotes;
@@ -19,7 +20,9 @@ $.getJSON('quotes.json', function (data){
 
 $(document).ready(function () {
 
-  let randomIndex = Math.floor(Math.random() * jsonEntries.length);
+  let input = $('#input');
+  lexicon = new RiLexicon();
+  randomIndex = Math.floor(Math.random() * jsonEntries.length);
 
   console.log(randomIndex);
   console.log(jsonEntries[randomIndex].quote);
@@ -27,16 +30,32 @@ $(document).ready(function () {
 
   input.text(jsonEntries[randomIndex].quote);
 
-
-
-
-
-  input.on('click', processRita);
+processRita();
 
 });
 
 function processRita() {
-  $('#input').text('input');
+  let input = $('#input');
+  let rs = new RiString(input.text());
+  let words = rs.words();
+  let pos = rs.pos();
+  console.log(words);
+  console.log(pos);
+
+  let output = '';
+  for (var i = 0; i < words.length - 1; i++) {
+    if (/nn.*/.test(pos[i])) {
+      output += lexicon.randomWord(pos[i]);
+    }
+    else {
+      output += words[i];
+    }
+
+    output += ' ';
+  }
+  console.log(output);
+
+  input.text(output);
 }
 
 
