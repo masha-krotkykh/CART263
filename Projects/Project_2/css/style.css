@@ -42,11 +42,11 @@ body {
   margin-right: auto;
   padding-top: 40%;
   text-align: center;
-  text-transform: uppercase;
-  font-size: 2em;
+  /* text-transform: uppercase; */
+  font-size: 2.5em;
   color: white;
   text-shadow: 0 5px 15px black;
-  font-family: helvetica;
+  font-family: 'Averia Libre', bold;
   line-height: 1.6em;
 }
 
