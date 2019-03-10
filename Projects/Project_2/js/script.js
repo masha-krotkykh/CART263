@@ -18,8 +18,35 @@ let randomIndex; // to pull a random entry from the JSON file
 
 let lexicon; // to get rita lexicon component
 
+var result; // final output variable
 
-var result;
+// list of URLs to get background from
+var backgrounds = [
+  "url('https://images.unsplash.com/photo-1496526311033-8a80ae14a1f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80')",
+  "url('https://images.unsplash.com/photo-1478399305562-fbc9c0adb0e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2200&q=80')",
+  "url('https://images.unsplash.com/photo-1441422454217-519d3ee81350?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2378&q=80')",
+  "url('https://images.unsplash.com/photo-1494763709848-dc2193cd45b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80')",
+  "url('https://images.unsplash.com/photo-1488489153583-89ce18dd4968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80')",
+  "url('https://images.unsplash.com/photo-1459305953069-79f984c538c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80')",
+  "url('https://images.unsplash.com/photo-1508492107686-e9fa051269c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+  "url('https://images.unsplash.com/photo-1481450112092-f00a4c77e381?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=714&q=80')",
+  "url('https://images.unsplash.com/photo-1423474695515-c64cdacb6a07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+  "url('https://images.unsplash.com/photo-1473147319958-21c51372f690?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80')",
+  "url('https://images.unsplash.com/photo-1463677361184-5d995504403a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80')",
+  "url('https://images.unsplash.com/photo-1454551272232-16b9502430e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=633&q=80')",
+  "url('https://images.unsplash.com/photo-1472190649224-495422e1b602?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80')",
+  "url('https://images.unsplash.com/photo-1548312441-acaf3800c032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+  "url('https://images.unsplash.com/photo-1499898595565-f424ed1d075c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80')",
+  "url('https://images.unsplash.com/photo-1549338246-9d2864dbc22a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1491&q=80')",
+  "url('https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+  "url('https://images.unsplash.com/photo-1495917898236-efd1704e9906?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+  "url('https://images.unsplash.com/photo-1505533321630-975218a5f66f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80')",
+  "url('https://images.unsplash.com/photo-1454540723233-f0b9ff08b132?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1300&q=80')",
+  "url('https://images.unsplash.com/photo-1493130952181-47e36589f64d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1423&q=80')",
+  "url('https://images.unsplash.com/photo-1498496294664-d9372eb521f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+  "url('https://images.unsplash.com/photo-1462502124931-adc5046f1b45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+  "url('https://images.unsplash.com/photo-1431203488627-64527eb86dd9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+];
 
 // pulling entries from the JSON file
 $.getJSON('quotes.json', function (data){
@@ -29,7 +56,7 @@ $.getJSON('quotes.json', function (data){
 // Executes when the document is ready
 $(document).ready(function () {
 
-
+randombg();
 // introducing annyang for voice control
   if (annyang) {
       // Let's define our first command. First the text we expect, and then the function it should call
@@ -71,7 +98,7 @@ function processRita() {
   console.log(words);
   console.log(pos);
 
-  let output = ''; // defining an output as an empty string
+  var output = ''; // defining an output as an empty string
  // checking every word for being a specific POS (noun singular or noun plural)
  // replacing words with random words from RiTa lexicon
 
@@ -112,11 +139,11 @@ function processRita() {
 
     output += ' '; // adding a space after each word
     console.log(probability);
+    result = output;
   }
 
   input.text(output); // outputing resulting text on the page
-  responsiveVoice.speak(output, "US English Female");
-  result = output;
+  say();
 }
 
 // When the button is pressed page reloads
@@ -126,5 +153,11 @@ function moreWisdom() {
 
 // To repeat the phrase that is currently displayed
 function say() {
-  responsiveVoice.speak(result, "US English Female");
+  responsiveVoice.speak(result, "UK English Female", {rate: 0.6});
+}
+
+// Function to load random background from the list of URLs
+function randombg(){
+  var random= Math.floor(Math.random() * backgrounds.length);
+  document.getElementById("image").style.backgroundImage=backgrounds[random];
 }

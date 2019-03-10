@@ -10,3 +10,53 @@ body {
   padding: 0;
   margin: 0;
 }
+
+#main {
+  max-width: 90%;
+  width: 800px;
+  height: 100vh;
+  margin: auto;
+}
+
+#main p {
+  font-family: helvetica;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+#image {
+  width: 100%;
+  height: 80%;
+  background-image:
+    url('https://images.unsplash.com/photo-1462502124931-adc5046f1b45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#input {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 40%;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2em;
+  color: white;
+  text-shadow: 0 5px 15px black;
+  font-family: helvetica;
+  line-height: 1.6em;
+}
+
+#go {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  font-family: helvetica;
+  font-size: 1em;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
