@@ -18,6 +18,9 @@ let randomIndex; // to pull a random entry from the JSON file
 
 let lexicon; // to get rita lexicon component
 
+
+var result;
+
 // pulling entries from the JSON file
 $.getJSON('quotes.json', function (data){
   jsonEntries = data.quotes;
@@ -25,6 +28,21 @@ $.getJSON('quotes.json', function (data){
 
 // Executes when the document is ready
 $(document).ready(function () {
+
+
+// introducing annyang for voice control
+  if (annyang) {
+      // Let's define our first command. First the text we expect, and then the function it should call
+      var commands = {
+        'tell me more': moreWisdom,
+        'repeat': say,
+      };
+      // Add our commands to annyang
+      annyang.addCommands(commands);
+
+      // Start listening. You can call this here, or attach this call to an event, button, etc.
+      annyang.start();
+  }
 
   let input = $('#input'); // target div in HTML file to be populated with resulting text
   lexicon = new RiLexicon(); // rita specific vocabulary component
@@ -38,7 +56,7 @@ $(document).ready(function () {
  // replacing placeholder text in the DOM element with a random quote
   input.text(jsonEntries[randomIndex].quote);
 
-processRita();
+  processRita();
 });
 
 // Function that replaces specific words with random words from rita lexicon
@@ -63,7 +81,6 @@ function processRita() {
       if (/nn.*/.test(pos[i])) {
         output += lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (nouns)
       }
-
       else {
         output += words[i]; // other POS will stay unchanged
       }
@@ -74,7 +91,6 @@ function processRita() {
       if (/vb.*/.test(pos[i])) {
         output += lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
       }
-
       else {
         output += words[i]; // other POS will stay unchanged
       }
@@ -89,11 +105,9 @@ function processRita() {
       else if (/vb.*/.test(pos[i])) {
         output += lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
       }
-
       else {
         output += words[i]; // other POS will stay unchanged
       }
-
     }
 
     output += ' '; // adding a space after each word
@@ -101,9 +115,16 @@ function processRita() {
   }
 
   input.text(output); // outputing resulting text on the page
+  responsiveVoice.speak(output, "US English Female");
+  result = output;
 }
 
 // When the button is pressed page reloads
 function moreWisdom() {
   location.reload();
+}
+
+// To repeat the phrase that is currently displayed
+function say() {
+  responsiveVoice.speak(result, "US English Female");
 }
