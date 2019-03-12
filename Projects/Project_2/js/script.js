@@ -3,7 +3,7 @@
 /*****************
 
 Project_2
-Mariia Krotkykh
+Masha Krotkykh
 
 Script using external JSON file with inspirational quotes from various famous people.
 Using RiTa.js to replace contents randomly creating nonsensical "wise" phrases.
@@ -15,13 +15,11 @@ RiTa functionality based on Daniel Shiffman's tutorial: https://www.youtube.com/
 ******************/
 let jsonEntries = []; // an array of entries from the JSON file
 let randomIndex; // to pull a random entry from the JSON file
-
 let lexicon; // to get rita lexicon component
-
 var result; // final output variable
 
 // list of URLs to get background from
-var backgrounds = [
+let backgrounds = [
   "url('https://images.unsplash.com/photo-1496526311033-8a80ae14a1f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80')",
   "url('https://images.unsplash.com/photo-1478399305562-fbc9c0adb0e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2200&q=80')",
   "url('https://images.unsplash.com/photo-1441422454217-519d3ee81350?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2378&q=80')",
@@ -48,16 +46,12 @@ var backgrounds = [
   "url('https://images.unsplash.com/photo-1431203488627-64527eb86dd9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
 ];
 
-// pulling entries from the JSON file
-$.getJSON('quotes.json', function (data){
-  jsonEntries = data.quotes;
-});
-
 // Executes when the document is ready
 $(document).ready(function () {
+  randombg(); // setting random background
+  getQuote(); // getting a quote from JSON, manipulating and displaying it
 
-randombg();
-// introducing annyang for voice control
+  // introducing annyang for voice control
   if (annyang) {
       // Let's define our first command. First the text we expect, and then the function it should call
       var commands = {
@@ -70,21 +64,28 @@ randombg();
       // Start listening. You can call this here, or attach this call to an event, button, etc.
       annyang.start();
   }
-
-  let input = $('#input'); // target div in HTML file to be populated with resulting text
-  lexicon = new RiLexicon(); // rita specific vocabulary component
-
-  // calculating random index for quotes array
-  randomIndex = Math.floor(Math.random() * jsonEntries.length);
-
-  console.log(randomIndex);
-  console.log(jsonEntries[randomIndex].quote);
-
- // replacing placeholder text in the DOM element with a random quote
-  input.text(jsonEntries[randomIndex].quote);
-
-  processRita();
 });
+
+function getQuote() {
+  // pulling entries from the JSON file
+  $.getJSON('quotes.json', function (data){
+    jsonEntries = data.quotes; // populating the jsonEntries array with entries from JSON file
+
+    let input = $('#input'); // target div in HTML file to be populated with resulting text
+    lexicon = new RiLexicon(); // rita specific vocabulary component
+
+    // calculating random index for quotes array
+    randomIndex = Math.floor(Math.random() * jsonEntries.length);
+
+   // replacing placeholder text in the DOM element with a random quote
+    input.text(jsonEntries[randomIndex].quote);
+
+    processRita(); // to manipulate the resulting quote
+
+    console.log(randomIndex);
+    console.log(jsonEntries[randomIndex].quote);
+  });
+}
 
 // Function that replaces specific words with random words from rita lexicon
 function processRita() {
@@ -143,7 +144,7 @@ function processRita() {
   }
 
   input.text(output); // outputing resulting text on the page
-  say();
+  say(); // make responsiveVoice read the quote
 }
 
 // When the button is pressed page reloads
@@ -153,7 +154,7 @@ function moreWisdom() {
 
 // To repeat the phrase that is currently displayed
 function say() {
-  responsiveVoice.speak(result, "UK English Female", {rate: 0.6});
+  responsiveVoice.speak(result, "UK English Female", {rate: 0.8});
 }
 
 // Function to load random background from the list of URLs
