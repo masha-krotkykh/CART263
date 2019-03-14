@@ -13,8 +13,7 @@ JSON source: https://gist.github.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee8
 RiTa functionality based on Daniel Shiffman's tutorial: https://www.youtube.com/watch?v=lIPEvh8HbGQ
 
 ******************/
-let jsonEntries = []; // an array of entries from the JSON file
-let randomIndex; // to pull a random entry from the JSON file
+
 let lexicon; // to get rita lexicon component
 var result; // final output variable
 
@@ -69,13 +68,13 @@ $(document).ready(function () {
 function getQuote() {
   // pulling entries from the JSON file
   $.getJSON('quotes.json', function (data){
-    jsonEntries = data.quotes; // populating the jsonEntries array with entries from JSON file
+    let jsonEntries = data.quotes; // populating the jsonEntries array with entries from JSON file
 
     let input = $('#input'); // target div in HTML file to be populated with resulting text
     lexicon = new RiLexicon(); // rita specific vocabulary component
 
     // calculating random index for quotes array
-    randomIndex = Math.floor(Math.random() * jsonEntries.length);
+    let randomIndex = Math.floor(Math.random() * jsonEntries.length); // to pull a random entry from the JSON file
 
    // replacing placeholder text in the DOM element with a random quote
     input.text(jsonEntries[randomIndex].quote);
@@ -160,5 +159,5 @@ function say() {
 // Function to load random background from the list of URLs
 function randombg(){
   var random= Math.floor(Math.random() * backgrounds.length);
-  document.getElementById("image").style.backgroundImage=backgrounds[random];
+  document.getElementById("image").style.backgroundImage = backgrounds[random];
 }
