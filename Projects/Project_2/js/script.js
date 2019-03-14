@@ -106,7 +106,10 @@ function processRita() {
   for (var i = 0; i < words.length; i++) {
     if (probability < .4) {
       if (/nn.*/.test(pos[i])) {
-        output += lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (nouns)
+        output += ' ' + lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (nouns)
+      }
+      else if(words[i] != ',' && words[i] != '.' && words[i] != ':' && words[i] != ';' && words[i] != '?' && words[i] != '!') {
+        output += ' ' + words[i]; // other POS will stay unchanged and the space will be added before them unless they are punctuation
       }
       else {
         output += words[i]; // other POS will stay unchanged
@@ -116,7 +119,10 @@ function processRita() {
    // if probability variable is between .4 and .8, all verbs will be replaced with random verbs
     else if (probability < .8) {
       if (/vb.*/.test(pos[i])) {
-        output += lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
+        output += ' ' + exicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
+      }
+      else if(words[i] != ',' && words[i] != '.' && words[i] != ':' && words[i] != ';' && words[i] != '?' && words[i] != '!') {
+        output += ' ' + words[i]; // other POS will stay unchanged and the space will be added before them unless they are punctuation
       }
       else {
         output += words[i]; // other POS will stay unchanged
@@ -126,18 +132,21 @@ function processRita() {
    // if probability variable is between .8 and 1, both nouns and verbs will be replaced with random
     else {
       if (/nn.*/.test(pos[i])) {
-        output += lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (nouns)
+        output += ' ' + lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (nouns)
       }
 
       else if (/vb.*/.test(pos[i])) {
-        output += lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
+        output += ' ' + lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
+      }
+      else if(words[i] != ',' && words[i] != '.' && words[i] != ':' && words[i] != ';' && words[i] != '?' && words[i] != '!') {
+        output += ' ' + words[i]; // other POS will stay unchanged and the space will be added before them unless they are punctuation
       }
       else {
         output += words[i]; // other POS will stay unchanged
       }
     }
 
-    output += ' '; // adding a space after each word
+    // output += ' '; // adding a space after each word
     console.log(probability);
     result = output;
   }
