@@ -119,7 +119,7 @@ function processRita() {
    // if probability variable is between .4 and .8, all verbs will be replaced with random verbs
     else if (probability < .8) {
       if (/vb.*/.test(pos[i])) {
-        output += ' ' + exicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
+        output += ' ' + lexicon.randomWord(pos[i]); // replacing a word with another of the same POS (verbs)
       }
       else if(words[i] != ',' && words[i] != '.' && words[i] != ':' && words[i] != ';' && words[i] != '?' && words[i] != '!') {
         output += ' ' + words[i]; // other POS will stay unchanged and the space will be added before them unless they are punctuation
