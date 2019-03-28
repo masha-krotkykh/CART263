@@ -19,6 +19,12 @@ let pattern = ['x','o','','x','x*','o*','x*','o*']; // DRUMMACHINE PATTERN
 let patternIndex = 0;
 let clickable = true;
 
+var tremolo = new Pizzicato.Effects.Tremolo({
+    speed: 7,
+    depth: 0.8,
+    mix: 0.8
+});
+
 // preload()
 //
 // Description of preload
@@ -37,11 +43,6 @@ function setup() {
       source: 'wave',
   });
   synth.on('play', function() {
-    var tremolo = new Pizzicato.Effects.Tremolo({
-        speed: 7,
-        depth: 0.8,
-        mix: 0.8
-    });
     synth.addEffect(tremolo);
   })
 
@@ -91,7 +92,7 @@ function draw() {
 function playNote() {
   let randomFr = random(frequencies); // RANDOM IN P5!!!
   synth.frequency = randomFr;
-
+  // synth.addEffect(tremolo);
   synth.play();
   console.log('playing');
   setTimeout(stopNote, 500 * floor(random(5)));
@@ -99,6 +100,7 @@ function playNote() {
 
 function stopNote() {
   synth.stop();
+  synth.removeEffect(tremolo);
   setTimeout(playNote, 100 * floor(random(5)+1));
   console.log('stopped');
 }
