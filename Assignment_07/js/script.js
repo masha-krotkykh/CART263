@@ -19,7 +19,6 @@ let pattern = ['x','o','','x','x*','o*','x*','o*']; // DRUMMACHINE PATTERN
 let patternIndex = 0;
 let clickable = true;
 
-
 // preload()
 //
 // Description of preload
@@ -37,10 +36,48 @@ function setup() {
   synth = new Pizzicato.Sound({
       source: 'wave',
   });
+  synth.on('play', function() {
+    var tremolo = new Pizzicato.Effects.Tremolo({
+        speed: 7,
+        depth: 0.8,
+        mix: 0.8
+    });
+    synth.addEffect(tremolo);
+  })
 
   kick = new Pizzicato.Sound('assets/sounds/kick.wav');
+  kick.on('play', function() {
+    var reverb = new Pizzicato.Effects.Reverb({
+      time: 0.01,
+      decay: 0.01,
+      reverse: false,
+      mix: 0.5
+    });
+    kick.addEffect(reverb);
+  })
+
   snare = new Pizzicato.Sound('assets/sounds/snare.wav');
+  snare.on('play', function() {
+    var reverb = new Pizzicato.Effects.Reverb({
+      time: 0.01,
+      decay: 0.01,
+      reverse: false,
+      mix: 0.5
+    });
+    snare.addEffect(reverb);
+  })
+
   hihat = new Pizzicato.Sound('assets/sounds/hihat.wav');
+  hihat.on('play', function() {
+    var reverb = new Pizzicato.Effects.Reverb({
+      time: 0.01,
+      decay: 0.01,
+      reverse: false,
+      mix: 0.5
+    });
+    hihat.addEffect(reverb);
+  })
+
 }
 
 // draw()
@@ -55,42 +92,31 @@ function playNote() {
   let randomFr = random(frequencies); // RANDOM IN P5!!!
   synth.frequency = randomFr;
 
-  var tremolo = new Pizzicato.Effects.Tremolo({
-      speed: 7,
-      depth: 0.8,
-      mix: 0.8
-  });
-  synth.addEffect(tremolo);
   synth.play();
   console.log('playing');
-  setTimeout(stopNote, 300 * floor(random(5)));
+  setTimeout(stopNote, 500 * floor(random(5)));
 }
 
 function stopNote() {
   synth.stop();
-  setTimeout(playNote, 100 * floor(random(5)));
+  setTimeout(playNote, 100 * floor(random(5)+1));
   console.log('stopped');
 }
 
 function playDrum() {
   let symbols = pattern[patternIndex];
-  var reverb = new Pizzicato.Effects.Reverb({
-    time: 0.01,
-    decay: 0.01,
-    reverse: false,
-    mix: 0.5
-});
+
 
   if(symbols.indexOf('x') !== -1) {
-    kick.addEffect(reverb);
+    kick.volume = 0.3;
     kick.play();
   }
   if(symbols.indexOf('o') !== -1) {
-    snare.addEffect(reverb);
+    snare.volume = 0.3;
     snare.play();
   }
   if(symbols.indexOf('*') !== -1) {
-    hihat.addEffect(reverb);
+    hihat.volume = 0.3;
     hihat.play();
   }
 
