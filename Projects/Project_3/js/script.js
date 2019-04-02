@@ -22,13 +22,9 @@ console.log(images);
 $(document).ready(function() {
 
   for (let i = 0; i < imageQty; i ++) {
-    $('<img src="assets/images/' + images[Math.floor(Math.random() * images.length)] + '">').appendTo('#collage');
-    let randomTop = Math.floor(Math.random() * $ ('#collage').height());
-    let randomLeft = Math.floor(Math.random() * $ ('#collage').width());
-    $(this).css({
-      'top' : randomTop,
-      'left' : randomLeft
-    });
+    let randomTop = Math.floor(Math.random() * $('#collage').height());
+    let randomLeft = Math.floor(Math.random() * $('#collage').width());
+    let randomWidth = Math.floor(Math.random() * 500);
+    $('<img src="assets/images/' + images[Math.floor(Math.random() * images.length)] + '" style="top:'+randomLeft+'px; left:'+randomTop+'px; width:'+randomWidth+'px;">').appendTo('#collage');
   }
-
 })

@@ -18,5 +18,6 @@ body {
 #collage img {
   width: 100px;
   height: auto;
+  position: absolute;
   display: inline-block;
 }
