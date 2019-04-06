@@ -8,7 +8,7 @@ Masha Krotkykh
 ******************/
 
 
-let imageTotal = 13; // total number of images in the mmage folder
+let imageTotal = 64; // total number of images in the mmage folder
 let images = []; // empty image array
 
 // populating an arry with images
