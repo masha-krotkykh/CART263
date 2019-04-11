@@ -30,6 +30,8 @@ function setup() {
 
   createCanvas(1000, 500);
 
+  speech.stop();
+
   // Load the font
   f = loadFont("assets/TravelingTypewriter.otf")
   textFont(f, 20);
@@ -99,8 +101,6 @@ nz+=waveChange;
   }
 }
 function speak() {
-  speech.stop();
-  speech.start();
   speech.setVoice('Moira');
   speech.setRate(.9);
   speech.setVolume(volume);
