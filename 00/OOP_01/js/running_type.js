@@ -9,42 +9,100 @@ var message = "out... into this world... this world... tiny little thing... befo
 
 // An array of Letter objects
 var letters;
-
-// function preload() {
-//   myFont = loadFont("assets/TravelingTypewriter.otf")
-// }
+var x;
+var bgOpacity = 255;
+var xstep = 20;
+var ystep = 5;
+var y = 0;
+var waveChange = .08;
+var nx;
+var ny;
+var nz;
+var level;
+var tooNoisy = false;
+var speech = new p5.Speech();
+var volume = 1.0;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  nx = random(200);
+  ny = random(200);
+  nz = random(1000);
+
+  createCanvas(1000, 500);
 
   // Load the font
-  textFont("Courier", 20);
+  f = loadFont("assets/TravelingTypewriter.otf")
+  textFont(f, 20);
 
   // Create the array the same size as the String
   letters = [];
 
   // Initialize Letters at the correct x location
-  var x = width/2;
+  x = width/2;
   for (var i = 0; i < message.length; i ++ ) {
     // Letter objects are initialized with their location within the String as well as what character they should display.
     letters[i] = new Letter(x, height/2, message.charAt(i));
-    x += textWidth(message.charAt(i));
+    x += textWidth(message.charAt(i))+10;
   }
+
+  speech.onLoad = speak;
 }
 
 function draw() {
-  background(255);
+  background(0,bgOpacity);
+
+  stroke(100, 5);
+  strokeWeight(25);
+  noFill();
+
+  // Describing waves 'in the background
+for (var j = 0; height+ystep > j; j+=ystep) {
+  beginShape();
+  vertex(0, j);
+  for (var i = 0; i < width+xstep; i+=xstep) {
+    nx = i/234;
+    ny = j/165;
+    y = map(noise(nx, ny, nz), 0, 1, -250, 250)+j;
+    curveVertex(i, y);
+  }
+  vertex(width, j);
+  endShape();
+}
+// Wave intensity changes if it becomes too noisy
+nz+=waveChange;
+
+
   for (var i = 0; i < letters.length; i ++ ) {
 
     // Display all letters
-    letters[i].display();
+    letters[i].update();
+    if(letters[i].x + (textWidth(message.charAt(i))) > 0 && letters[i].x - (textWidth(message.charAt(i))) < width) {
+      letters[i].display();
+    }
 
     // If the mouse is pressed the letters shake
     // If not, they return to their original location
     if (mouseIsPressed) {
-      letters[i].shake();
+      if(letters[i].x + (textWidth(message.charAt(i))) > 0 && letters[i].x - (textWidth(message.charAt(i))) < width) {
+        letters[i].shake();
+      }
+    waveChange = .02;
+    bgOpacity = 60;
+    volume = 0.1;
+
     } else {
       letters[i].home();
+      waveChange = .08;
+      bgOpacity = 255;
+      volume = 1.0;
     }
   }
+}
+function speak() {
+  speech.stop();
+  speech.start();
+  speech.setVoice('Moira');
+  speech.setRate(.9);
+  speech.setVolume(volume);
+  speech.speak(message);
 }
