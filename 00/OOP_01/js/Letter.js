@@ -20,7 +20,7 @@ class Letter {
   }
 
   update() {
-    this.homex = this.homex - 30;
+    this.homex = this.homex - 15;
   }
 
   // Display the letter
