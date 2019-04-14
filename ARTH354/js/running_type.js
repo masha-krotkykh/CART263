@@ -22,7 +22,7 @@ var level;
 var tooNoisy = false;
 var speech = new p5.Speech();
 var active;
-var mic;
+let mic;
 
 function setup() {
   nx = random(200);
@@ -33,7 +33,8 @@ function setup() {
   speech.stop();
 
   mic = new p5.AudioIn();
-
+  mic.start();
+  
   var canvas = createCanvas(1000, 300);
   canvas.parent('sketch-holder');
 
@@ -51,7 +52,6 @@ function setup() {
     letters[i] = new Letter(x, height/2, message.charAt(i));
     x += textWidth(message.charAt(i))+10;
   }
-  mic.start();
 }
 
 function draw() {
