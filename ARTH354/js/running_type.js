@@ -32,6 +32,9 @@ function setup() {
   speech.pause();
   speech.stop();
 
+  mic = new p5.AudioIn();
+  mic.start();
+
   var canvas = createCanvas(1000, 300);
   canvas.parent('sketch-holder');
 
@@ -119,7 +122,6 @@ function speak() {
 
 function keyPressed() {
     active = !active;
-    mic = new p5.AudioIn();
-    mic.start();
+
     speak();
 }
