@@ -21,20 +21,20 @@ var nz;
 var level;
 var tooNoisy = false;
 var speech = new p5.Speech();
-var volume = 1.0;
-var active = false;
+var active;
+var mic;
 
 function setup() {
   nx = random(200);
   ny = random(200);
   nz = random(1000);
+  active = false;
   speech.stop();
+  mic = new p5.AudioIn();
+  mic.start();
 
   var canvas = createCanvas(1000, 300);
   canvas.parent('sketch-holder');
-  // canvas.parent('sketch-holder');
-
-  // speech.stop();
 
   // Load the font
   f = loadFont("assets/TravelingTypewriter.otf")
@@ -53,8 +53,7 @@ function setup() {
 }
 
 function draw() {
-  background(0,bgOpacity);
-
+  background(0, bgOpacity);
   stroke(100, 5);
   strokeWeight(25);
   noFill();
@@ -87,7 +86,6 @@ nz+=waveChange;
     // If the mouse is pressed the letters shake
     // If not, they return to their original location
     if (mouseIsPressed) {
-      // speak();
       if(letters[i].x + (textWidth(message.charAt(i))) > 0 && letters[i].x - (textWidth(message.charAt(i))) < width) {
         letters[i].shake();
       }
@@ -108,14 +106,14 @@ nz+=waveChange;
 function speak() {
   speech.setVoice('Moira');
   speech.setRate(.8);
-  speech.setVolume(volume);
+  speech.setVolume(0.1);
   speech.speak(message);
-
 }
 
 function keyPressed() {
     active = !active;
     speak();
+
     if(active) {
       speech.resume();
     }
