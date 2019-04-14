@@ -31,6 +31,8 @@ function setup() {
   active = false;
   speech.pause();
   speech.stop();
+  mic = new p5.AudioIn();
+
 
   var canvas = createCanvas(1000, 300);
   canvas.parent('sketch-holder');
@@ -49,6 +51,8 @@ function setup() {
     letters[i] = new Letter(x, height/2, message.charAt(i));
     x += textWidth(message.charAt(i))+10;
   }
+
+  mic.start();
 }
 
 function draw() {
@@ -105,8 +109,6 @@ nz+=waveChange;
 }
 
 function speak() {
-  mic = new p5.AudioIn();
-  mic.start();
   speech.setVoice('Moira');
   speech.setRate(.8);
   speech.setVolume(0.1);
