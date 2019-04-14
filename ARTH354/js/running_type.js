@@ -22,10 +22,11 @@ var level;
 var tooNoisy = false;
 var speech = new p5.Speech();
 var active;
-let mic;
-var vol;
 
 function setup() {
+  soundFormats('mp3', 'wav');
+  noiseOne = loadSound('assets/sound/distort_04.wav');
+  noiseTwo = loadSound('assets/sound/distort_02.mp3');
   nx = random(200);
   ny = random(200);
   nz = random(1000);
@@ -50,9 +51,6 @@ function setup() {
     letters[i] = new Letter(x, height/2, message.charAt(i));
     x += textWidth(message.charAt(i))+10;
   }
-
-  mic = new p5.AudioIn();
-
 }
 
 function draw() {
@@ -60,11 +58,6 @@ function draw() {
   stroke(100, 5);
   strokeWeight(25);
   noFill();
-
-  if(active) {
-    vol = mic.getLevel();
-    console.log(vol);
-  }
 
   // Describing waves 'in the background
   for (var j = 0; height+ystep > j; j+=ystep) {
@@ -82,9 +75,7 @@ function draw() {
   // Wave intensity changes if it becomes too noisy
   nz+=waveChange;
 
-
   for (var i = 0; i < letters.length; i ++ ) {
-
     // Display all letters
     letters[i].update();
     if(letters[i].x + (textWidth(message.charAt(i))) > 0 && letters[i].x - (textWidth(message.charAt(i))) < width) {
@@ -93,32 +84,31 @@ function draw() {
 
     // If the mouse is pressed the letters shake
     // If not, they return to their original location
-    if (mouseIsPressed) {
+    if (keyIsPressed) {
       if(letters[i].x + (textWidth(message.charAt(i))) > 0 && letters[i].x - (textWidth(message.charAt(i))) < width) {
         letters[i].shake();
+        noiseOne.setVolume(.5);
+        noiseTwo.setVolume(1);
+        noiseOne.play();
+        noiseTwo.play();
       }
-
-    waveChange = .02;
-    bgOpacity = 60;
-    volume = 0.1;
+      waveChange = .02;
+      bgOpacity = 60;
+      speechVolume = 0.1;
 
     } else {
       letters[i].home();
       waveChange = .08;
       bgOpacity = 255;
-      volume = 1.0;
+      speechVolume = 1;
     }
   }
-
-  var h = map(vol, 0, 1, height, 0);
-  ellipse(width/2, h - 25, 50, 50);
 }
 
 function speak() {
-  // mic.resume();
   speech.setVoice('Moira');
   speech.setRate(.8);
-  speech.setVolume(0.1);
+  speech.setVolume(speechVolume);
   speech.speak(message);
   if(active) {
     speech.resume();
@@ -129,7 +119,6 @@ function speak() {
 }
 
 function keyPressed() {
-    active = !active;
+    active = true;
     speak();
-    mic.start();
 }
