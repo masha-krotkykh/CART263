@@ -22,13 +22,17 @@ var level;
 var tooNoisy = false;
 var speech = new p5.Speech();
 var volume = 1.0;
+var active = false;
 
 function setup() {
   nx = random(200);
   ny = random(200);
   nz = random(1000);
+  speech.stop();
 
-  createCanvas(1000, 500);
+  var canvas = createCanvas(1000, 300);
+  canvas.parent('sketch-holder');
+  // canvas.parent('sketch-holder');
 
   // speech.stop();
 
@@ -46,8 +50,6 @@ function setup() {
     letters[i] = new Letter(x, height/2, message.charAt(i));
     x += textWidth(message.charAt(i))+10;
   }
-
-  speech.onLoad = speak;
 }
 
 function draw() {
@@ -85,9 +87,11 @@ nz+=waveChange;
     // If the mouse is pressed the letters shake
     // If not, they return to their original location
     if (mouseIsPressed) {
+      // speak();
       if(letters[i].x + (textWidth(message.charAt(i))) > 0 && letters[i].x - (textWidth(message.charAt(i))) < width) {
         letters[i].shake();
       }
+
     waveChange = .02;
     bgOpacity = 60;
     volume = 0.1;
@@ -100,9 +104,22 @@ nz+=waveChange;
     }
   }
 }
+
 function speak() {
   speech.setVoice('Moira');
   speech.setRate(.8);
   speech.setVolume(volume);
   speech.speak(message);
+
+}
+
+function keyPressed() {
+    active = !active;
+    speak();
+    if(active) {
+      speech.resume();
+    }
+    else {
+      speech.pause();
+    }
 }

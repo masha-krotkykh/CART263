@@ -8,19 +8,27 @@ var r = 255;
 var g = 255;
 var b = 255;
 var a;
+var movement;
 
 class Letter {
-  constructor(x, y, letter, a) {
+  constructor(x, y, letter, a, movement) {
     // The object knows its original " home " location
     // As well as its current location
     this.homex = this.x = x;
     this.homey = this.y = y;
     this.letter = letter;
     this.a = a;
+    this.movement = movement;
   }
 
   update() {
-    this.homex = this.homex - 15;
+    if(active) {
+      movement = 15;
+    }
+    else {
+      movement = 0;
+    }
+    this.homex = this.homex - movement;
   }
 
   // Display the letter

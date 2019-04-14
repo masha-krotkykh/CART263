@@ -6,7 +6,27 @@ so the canvas is flush with the top left corner.
 
 **********************************************/
 
-body {
-  padding: 0;
-  margin: 0;
+html {
+
+  width: 100%;
+  background-color: black;
+}
+
+#sketch-holder {
+  width: 1000px;
+  height: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30vh;
+  border: 1px solid grey;
+}
+
+p {
+  color: grey;
+  font-family: courier, monospace;
+  display: block;
+  width: 1000px;
+  margin: 0 auto;
+  padding-top:15px;
 }
