@@ -32,9 +32,6 @@ function setup() {
   speech.pause();
   speech.stop();
 
-  mic = new p5.AudioIn();
-  mic.start();
-  
   var canvas = createCanvas(1000, 300);
   canvas.parent('sketch-holder');
 
@@ -52,6 +49,9 @@ function setup() {
     letters[i] = new Letter(x, height/2, message.charAt(i));
     x += textWidth(message.charAt(i))+10;
   }
+
+  mic = new p5.AudioIn();
+  mic.start();
 }
 
 function draw() {
