@@ -23,6 +23,7 @@ var tooNoisy = false;
 var speech = new p5.Speech();
 var active;
 let mic;
+var vol;
 
 function setup() {
   nx = random(200);
@@ -51,7 +52,7 @@ function setup() {
   }
 
   mic = new p5.AudioIn();
-  mic.start();
+
 }
 
 function draw() {
@@ -59,24 +60,27 @@ function draw() {
   stroke(100, 5);
   strokeWeight(25);
   noFill();
-  var vol = mic.getLevel();
-  console.log(vol);
+
+  if(active) {
+    vol = mic.getLevel();
+    console.log(vol);
+  }
 
   // Describing waves 'in the background
-for (var j = 0; height+ystep > j; j+=ystep) {
-  beginShape();
-  vertex(0, j);
-  for (var i = 0; i < width+xstep; i+=xstep) {
-    nx = i/234;
-    ny = j/165;
-    y = map(noise(nx, ny, nz), 0, 1, -250, 250)+j;
-    curveVertex(i, y);
+  for (var j = 0; height+ystep > j; j+=ystep) {
+    beginShape();
+    vertex(0, j);
+    for (var i = 0; i < width+xstep; i+=xstep) {
+      nx = i/234;
+      ny = j/165;
+      y = map(noise(nx, ny, nz), 0, 1, -250, 250)+j;
+      curveVertex(i, y);
+    }
+    vertex(width, j);
+    endShape();
   }
-  vertex(width, j);
-  endShape();
-}
-// Wave intensity changes if it becomes too noisy
-nz+=waveChange;
+  // Wave intensity changes if it becomes too noisy
+  nz+=waveChange;
 
 
   for (var i = 0; i < letters.length; i ++ ) {
@@ -105,10 +109,13 @@ nz+=waveChange;
       volume = 1.0;
     }
   }
+
+  var h = map(vol, 0, 1, height, 0);
+  ellipse(width/2, h - 25, 50, 50);
 }
 
 function speak() {
-  mic.resume();
+  // mic.resume();
   speech.setVoice('Moira');
   speech.setRate(.8);
   speech.setVolume(0.1);
@@ -123,6 +130,6 @@ function speak() {
 
 function keyPressed() {
     active = !active;
-
     speak();
+    mic.start();
 }
