@@ -29,6 +29,7 @@ function setup() {
   ny = random(200);
   nz = random(1000);
   active = false;
+  speech.pause();
   speech.stop();
   mic = new p5.AudioIn();
   mic.start();
@@ -110,16 +111,17 @@ function speak() {
   speech.setRate(.8);
   speech.setVolume(0.1);
   speech.speak(message);
+  if(active) {
+    speech.resume();
+  }
+  else {
+    speech.pause();
+  }
 }
 
 function keyPressed() {
     active = !active;
     speak();
 
-    if(active) {
-      speech.resume();
-    }
-    else {
-      speech.pause();
-    }
+
 }
