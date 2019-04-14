@@ -57,6 +57,8 @@ function draw() {
   stroke(100, 5);
   strokeWeight(25);
   noFill();
+  var vol = mic.getLevel();
+  console.log(vol);
 
   // Describing waves 'in the background
 for (var j = 0; height+ystep > j; j+=ystep) {
