@@ -106,9 +106,7 @@ function draw() {
 }
 
 function speak() {
-  speech.setVoice('Moira');
-  speech.setRate(.8);
-  speech.setVolume(speechVolume);
+
   speech.speak(message);
   if(active) {
     speech.resume();
@@ -119,6 +117,9 @@ function speak() {
 }
 
 function keyPressed() {
+  speech.setVoice('Moira');
+  speech.setRate(.8);
+  speech.setVolume(speechVolume);
     active = true;
     speak();
 }
