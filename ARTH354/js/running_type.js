@@ -33,6 +33,9 @@ function setup() {
   active = false;
   speech.pause();
   speech.stop();
+  speech.setVoice('Moira');
+  speech.setRate(.8);
+  speech.setVolume(speechVolume);
 
   var canvas = createCanvas(1000, 300);
   canvas.parent('sketch-holder');
@@ -106,7 +109,9 @@ function draw() {
 }
 
 function speak() {
-
+  speech.setVoice('Moira');
+  speech.setRate(.8);
+  speech.setVolume(speechVolume);
   speech.speak(message);
   if(active) {
     speech.resume();
@@ -117,9 +122,6 @@ function speak() {
 }
 
 function keyPressed() {
-  speech.setVoice('Moira');
-  speech.setRate(.8);
-  speech.setVolume(speechVolume);
     active = true;
     speak();
 }
