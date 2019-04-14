@@ -51,8 +51,6 @@ function setup() {
     letters[i] = new Letter(x, height/2, message.charAt(i));
     x += textWidth(message.charAt(i))+10;
   }
-
-  mic.start();
 }
 
 function draw() {
@@ -123,7 +121,6 @@ function speak() {
 
 function keyPressed() {
     active = !active;
+    mic.start();
     speak();
-
-
 }
