@@ -26,6 +26,7 @@ body {
 }
 
 #collage {
+  position: relative;
   width: 80vw;
   height:70vh;
   margin: 0 auto;
@@ -38,10 +39,20 @@ body {
   height: auto;
   position: absolute;
   display: inline-block;
+  padding:0;
 }
 
 .active {
   border: 1px solid black;
+}
+
+#bin {
+  border: 1px solid #b30000;
+  width: 150px;
+  height: 150px;
+  /* position: absolute;
+  bottom: -60px;
+  left: -10px; */
 }
 
 #poem, #result {

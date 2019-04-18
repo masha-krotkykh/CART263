@@ -34,7 +34,7 @@ let negRotation = 10; // rotation increment of -10deg.
 let scaleX = -1; // value for reflecting images along X-axis
 
 // --------------------------------POETRY------------------------------ //
-var order = 3; // number of letters in the n-gram
+var order = 7; // number of letters in the n-gram
 var ngrams = {}; // JS object to store info on all possible outcomes for given n-gram
 var beginnings = [];
 var verseLength = 30;
@@ -47,19 +47,24 @@ var randomGram;
 var sentences;
 var words;
 
-
 $(document).ready(function() {
-// --------------------------------IMAGES----------------------------- //
+// -----------------------IMAGES ON READY----------------------------- //
 // On document ready select random images and display them at random position and randmly scaled on the screen
   for (let i = 0; i < imageQty; i ++) {
-    let randomTop = Math.floor(Math.random() * 350);
-    let randomLeft = Math.floor(Math.random() * 850);
-    let randomWidth = Math.floor(Math.random() * 250) + 50;
-    $('<img src="assets/images/' + images[Math.floor(Math.random() * images.length)] + '" style="top:'+randomTop+'px; left:'+randomLeft+'px; width:'+randomWidth+'px; max-width: 100%;">').appendTo('#collage');
+    addImages();
   }
 
-  $('img').draggable(); // making images draggable to move them around
+  // $( ".resizable" ).resizable({
+  //   alsoResize: "#mirror"
+  // });
 
+
+
+  $('img').draggable({
+    stack: ".images"
+  }); // making images draggable to move them around and to set currently dragged image to front
+
+  $('img').addClass("images");
   // When the mouse is over an image it becomes active and allows for transfomations
   $('img').mouseover(function() {
     $(this).addClass("active");
@@ -69,6 +74,8 @@ $(document).ready(function() {
   $('img').mouseout(function() {
     $(this).removeClass("active");
   });
+
+  $('#bin').droppable();
 
 // Possible transformations for when mouse is over an image and it has a class of "active"
   $(this).keypress(function(event) {
@@ -112,11 +119,23 @@ $(document).ready(function() {
       });
       scaleX *= -1;
       break;
+      //
+      // case 120:
+      // currentZ = parseInt($('.active').css('zIndex'));
+      // console.log(currentZ);
+      //
+      // if (isNaN(currentZ)) {
+      //   currentZ = 0;
+      // }
+      // currentZ += 10;
+      // $('.active').css('zIndex', currentZ);
+      //
+      // break;
 
     }
   })
-
-  // --------------------------------POETRY----------------------------- //
+//z = 122; x = 120;
+  // ------------------------POETRY ON READY----------------------------- //
 
   var riTxt = new RiString(txt); // Split the string of text into individual words
   sentences = RiTa.splitSentences(txt);
@@ -157,6 +176,7 @@ $(document).ready(function() {
   clearButton.addEventListener("click", clear); // run clear function on button press
 })
 
+// -----------------------POETRY FUNCTIONS----------------------------- //
 function markov() {
   var currentGram = beginnings[Math.floor(Math.random() * beginnings.length)]; // the n-gram that we start the poem with
   var result = currentGram;
@@ -180,4 +200,12 @@ function clear() {
     result.removeChild(result.firstChild);
   }
 }
-//a = 97; s = 115; z = 122; x = 120; space = 32
+
+
+// -----------------------IMAGES FUNCTIONS----------------------------- //
+function addImages() {
+  let randomTop = Math.floor(Math.random() * 350);
+  let randomLeft = Math.floor(Math.random() * 850);
+  let randomWidth = Math.floor(Math.random() * 250) + 50;
+  $('<img src="assets/images/' + images[Math.floor(Math.random() * images.length)] + '" style="top:'+randomTop+'px; left:'+randomLeft+'px; width:'+randomWidth+'px; max-width: 100%;">').appendTo('#collage');
+}
