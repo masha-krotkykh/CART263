@@ -34,7 +34,7 @@ let negRotation = 10; // rotation increment of -10deg.
 let scaleX = -1; // value for reflecting images along X-axis
 
 // --------------------------------POETRY------------------------------ //
-var order = 7; // number of letters in the n-gram
+var order = 3; // number of letters in the n-gram
 var ngrams = {}; // JS object to store info on all possible outcomes for given n-gram
 var beginnings = [];
 var verseLength = 30;
@@ -144,13 +144,17 @@ $(document).ready(function() {
     }
   }
 
+  // Create a generate button and append it to the page
+  var genButton = document.createElement("BUTTON");
+  genButton.innerHTML = "Do DaDa";
+  document.getElementById("poem").appendChild(genButton);
+  genButton.addEventListener("click", markov); // run markov function on button press
 
-
-  // Create a button and append it to the page
-  var button = document.createElement("BUTTON");
-  button.innerHTML = "Generate Poem";
-  document.getElementById("poem").appendChild(button);
-  button.addEventListener("click", markov); // run markov function on button press
+  // Create a clear button and append it to the page
+  var clearButton = document.createElement("BUTTON");
+  clearButton.innerHTML = "UnDa the Do";
+  poem.appendChild(clearButton);
+  clearButton.addEventListener("click", clear); // run clear function on button press
 })
 
 function markov() {
@@ -159,9 +163,6 @@ function markov() {
 
   for (var i = 0; i < verseLength; i++) {
     var possibilities = ngrams[currentGram]; // for the current n-gram check the array of possibilities for the next char
-    if(!possibilities) {
-      break;
-    }
 
     var next = possibilities[Math.floor(Math.random() * possibilities.length)]; // pick a random option from this array
     result += next;
@@ -169,9 +170,14 @@ function markov() {
 
     console.log(currentGram);
   }
-
   var paragraph = document.createElement("P"); // Create a p element in the DOM
   paragraph.innerText = result;
-  document.getElementById("poem").appendChild(paragraph); // Append p to the "poem" div
+  document.getElementById("result").appendChild(paragraph); // Append p to the "poem" div
+}
+
+function clear() {
+  while (result.firstChild) {
+    result.removeChild(result.firstChild);
+  }
 }
 //a = 97; s = 115; z = 122; x = 120; space = 32

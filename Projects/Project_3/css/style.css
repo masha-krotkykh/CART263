@@ -3,16 +3,34 @@
 This is the style file for this project.
 
 **********************************************/
+@font-face {
+  font-family: typewriter;
+  src: url(../assets/fonts/TravelingTypewriter.otf);
+}
+
 body {
   width: 100%;
   height: 600px;
 }
+
+#instructions {
+  width: 80vw;
+  display: block;
+  margin: 0 auto;
+  font-family: typewriter;
+  font-size: .7em;
+}
+
+#bold {
+  color: red;
+}
+
 #collage {
   width: 80vw;
   height:70vh;
   margin: 0 auto;
-  border: 1px solid black;
-  /* background-color: turquoise; */
+  border: 10px solid #b30000;
+  background-image: url("../assets/bg/14519.jpg");
 }
 
 #collage img {
@@ -23,13 +41,19 @@ body {
 }
 
 .active {
-  border: 3px solid turquoise;
+  border: 1px solid black;
 }
 
-#poem {
+#poem, #result {
   width: 80vw;
   display: block;
   margin: 0 auto;
   padding-top: 20px;
   text-align: center;
+}
+
+p {
+  font-family: typewriter;
+  margin-top: 0;
+  margin-bottom: 0;
 }
