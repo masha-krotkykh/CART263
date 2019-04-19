@@ -34,7 +34,7 @@ let negRotation = 10; // rotation increment of -10deg.
 let scaleX = -1; // value for reflecting images along X-axis
 
 // --------------------------------POETRY------------------------------ //
-var order = 7; // number of letters in the n-gram
+var order = 4; // number of letters in the n-gram
 var ngrams = {}; // JS object to store info on all possible outcomes for given n-gram
 var beginnings = [];
 var verseLength = 30;
@@ -51,35 +51,28 @@ $(document).ready(function() {
 // -----------------------IMAGES ON READY----------------------------- //
 // On document ready select random images and display them at random position and randmly scaled on the screen
   for (let i = 0; i < imageQty; i ++) {
-    addImages();
+    addImage();
   }
 
   // $( ".resizable" ).resizable({
   //   alsoResize: "#mirror"
   // });
 
-
-
-  $('img').draggable({
-    stack: ".images"
-  }); // making images draggable to move them around and to set currently dragged image to front
-
-  $('img').addClass("images");
-  // When the mouse is over an image it becomes active and allows for transfomations
-  $('img').mouseover(function() {
-    $(this).addClass("active");
+  $('#bin').droppable({
+    drop: function(event, ui) {
+      $(this)
+      ui.draggable.remove();
+    }
   });
 
-  // When mouse is no longer over the image, it stops being active and is no longer affected by the transformations
-  $('img').mouseout(function() {
-    $(this).removeClass("active");
+  $( "#instructions" ).hide();
+  $( "#instructionsHeader" ).click(function() {
+    $( "#instructions" ).toggle();
   });
-
-  $('#bin').droppable();
 
 // Possible transformations for when mouse is over an image and it has a class of "active"
   $(this).keypress(function(event) {
-    //console.log(event.which);
+    console.log(event.which);
 
     switch(event.which) {
 
@@ -119,19 +112,10 @@ $(document).ready(function() {
       });
       scaleX *= -1;
       break;
-      //
-      // case 120:
-      // currentZ = parseInt($('.active').css('zIndex'));
-      // console.log(currentZ);
-      //
-      // if (isNaN(currentZ)) {
-      //   currentZ = 0;
-      // }
-      // currentZ += 10;
-      // $('.active').css('zIndex', currentZ);
-      //
-      // break;
 
+      case 105:
+      addImage();
+      break;
     }
   })
 //z = 122; x = 120;
@@ -196,16 +180,30 @@ function markov() {
 }
 
 function clear() {
-  while (result.firstChild) {
-    result.removeChild(result.firstChild);
-  }
+  //while (result.firstChild) {
+    result.removeChild(result.lastChild);
+  //}
 }
 
 
 // -----------------------IMAGES FUNCTIONS----------------------------- //
-function addImages() {
+function addImage() {
   let randomTop = Math.floor(Math.random() * 350);
   let randomLeft = Math.floor(Math.random() * 850);
   let randomWidth = Math.floor(Math.random() * 250) + 50;
   $('<img src="assets/images/' + images[Math.floor(Math.random() * images.length)] + '" style="top:'+randomTop+'px; left:'+randomLeft+'px; width:'+randomWidth+'px; max-width: 100%;">').appendTo('#collage');
+  $('img').draggable({
+    stack: ".images"
+  }); // making images draggable to move them around and to set currently dragged image to front
+
+  $('img').addClass("images");
+  // When the mouse is over an image it becomes active and allows for transfomations
+  $('img').mouseover(function() {
+    $(this).addClass("active");
+  });
+
+  // When mouse is no longer over the image, it stops being active and is no longer affected by the transformations
+  $('img').mouseout(function() {
+    $(this).removeClass("active");
+  });
 }
