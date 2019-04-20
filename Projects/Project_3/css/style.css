@@ -35,8 +35,8 @@ body {
   padding-bottom: 0;
 }
 
-#bold {
-  color: red;
+.bold {
+  color: #b30000;
   font-size: 1.1em;
 }
 

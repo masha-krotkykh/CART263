@@ -50,6 +50,8 @@ var txt = $.ajax({ // loading text from .txt file
 var randomGram;
 var sentences;
 
+var linebreak; // creating linebreak element
+
 $(document).ready(function() {
 // -----------------------IMAGES ON READY----------------------------- //
 // On document ready select random images and display them at random position and randomly scaled on the screen
@@ -162,6 +164,11 @@ $(document).ready(function() {
   clearButton.innerHTML = "UnDa the Do";
   poem.appendChild(clearButton);
   clearButton.addEventListener("click", clear); // run clear function on button press
+
+  var clearAllButton = document.createElement("BUTTON");
+  clearAllButton.innerHTML = "UnDo all Das";
+  poem.appendChild(clearAllButton);
+  clearAllButton.addEventListener("click", clearAll); // run clearAll function on button press
 })
 
 // -----------------------POETRY FUNCTIONS----------------------------- //
@@ -191,13 +198,24 @@ function riMarkov() {
 
 // Function to clear the last output result
 function clear() {
+  if(output.firstChild != null) {
+    while(output.lastChild != linebreak) {
+      output.removeChild(output.lastChild);
+    }
+  }
+}
+
+// Function to clear aall results
+function clearAll() {
+  while(output.firstChild != null) {
     output.removeChild(output.lastChild);
+  }
 }
 
 // Function to create a p DOM element and display results on the page
 function pushResult() {
   result = result.toString(); // Turning RiMarkov into a plain string
-  
+
   // var paragraph = document.createElement("P"); // Create a p element in the DOM
   // paragraph.innerText = result;
   // document.getElementById("output").appendChild(paragraph); // Append p to the "output" div
@@ -210,8 +228,8 @@ function pushResult() {
       }, 100 * (i + 1));
     })(i);
   }
-  var linebreak = document.createElement("br"); // Adding a linebreak at the end of the input
-  document.getElementById("output").appendChild(linebreak);
+  linebreak = document.createElement("br");
+  document.getElementById("output").appendChild(linebreak); // Adding a linebreak at the end of the input
 }
 
 // -----------------------IMAGES FUNCTIONS----------------------------- //
