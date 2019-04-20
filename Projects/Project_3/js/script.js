@@ -58,9 +58,7 @@ $(document).ready(function() {
   }
 
   // Make canvas resizable
-  $( ".resizable" ).resizable({
-    alsoResize: "#mirror" // Resize it from both sides to preserve symmetry
-  });
+  $( ".resizable" ).resizable();
 
   // Make #bin div a droppable
   $('#bin').droppable({
@@ -198,9 +196,22 @@ function clear() {
 
 // Function to create a p DOM element and display results on the page
 function pushResult() {
-  var paragraph = document.createElement("P"); // Create a p element in the DOM
-  paragraph.innerText = result;
-  document.getElementById("output").appendChild(paragraph); // Append p to the "output" div
+  result = result.toString(); // Turning RiMarkov into a plain string
+  
+  // var paragraph = document.createElement("P"); // Create a p element in the DOM
+  // paragraph.innerText = result;
+  // document.getElementById("output").appendChild(paragraph); // Append p to the "output" div
+
+// Creating a typewriter effect, where letters are appended one by one
+  for(var i = 0; i < result.length; i++) {
+    (function(i){
+      setTimeout(function(){
+        document.getElementById("output").append(result.charAt(i));
+      }, 100 * (i + 1));
+    })(i);
+  }
+  var linebreak = document.createElement("br"); // Adding a linebreak at the end of the input
+  document.getElementById("output").appendChild(linebreak);
 }
 
 // -----------------------IMAGES FUNCTIONS----------------------------- //
