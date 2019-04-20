@@ -72,7 +72,7 @@ body {
   background-repeat: no-repeat;
 }
 
-#poem, #result {
+#poem, #output {
   width: 80vw;
   display: block;
   margin: 0 auto;
